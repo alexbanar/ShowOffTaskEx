@@ -111,7 +111,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         private final TextView tvGenre2;
         private final TextView tvGenre3;
         private final ImageView ivThumbnail;
-        private ArrayList<String> genresList;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
@@ -122,23 +121,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             tvGenre2 = (TextView) itemView.findViewById(R.id.tvGenre2);
             tvGenre3 = (TextView) itemView.findViewById(R.id.tvGenre3);
             ivThumbnail = (ImageView) itemView.findViewById(R.id.ivThumbnail);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     // method of this RecyclerView.ViewHolder object
+                     // after click on the appropriate itemView object
+
+                     int position = getAdapterPosition();
+                     MovieItem movieItem = data.get(position);
+
+                     Intent intent = new Intent(context, DetailsActivity.class);
+                     intent.putExtra("Movie", movieItem);
+                     context.startActivity(intent);
+                 }
+             });
         }
-
-        /*itemView.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 // method of this RecyclerView.ViewHolder object
-                 // after click on the appropriate itemView object
-                 int position = getAdapterPosition();
-                 MovieItem movieItem = data.get(position);
-
-                 Intent intent = new Intent(context, DetailsActivity.class);
-
-                 intent.putExtra("Movie", movieItem);
-
-                 context.startActivity(intent);
-             }
-         });*/
-
      }
 }
