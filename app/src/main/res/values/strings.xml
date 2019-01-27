@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ShowOffTaskEx</string>
+    <string name="action_settings">Settings</string>
+    <string name="rating_init">0.0</string>
+    <string name="genre">Genre</string>
+    <string name="movie_name">Name</string>
+    <string name="release_year">2000</string>
+</resources>
