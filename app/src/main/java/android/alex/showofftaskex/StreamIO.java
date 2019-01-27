@@ -63,8 +63,7 @@ public class StreamIO {
         }
     }
 
-    //read from the web
-    //https://www.reddit.com/r/Android/.json
+    //read from the web http://api.androidhive.info/json/movies.json
     public static String readWebSite(String address) throws IOException {
         URL url = null;
         try {
@@ -72,7 +71,7 @@ public class StreamIO {
         } catch (MalformedURLException e) {
             throw new IOException("failed at parsing the URL.", e);
         }
-        Log.d("Ness", address);
+        //Log.d("alex", address);
         URLConnection con = url.openConnection();
         InputStream in = con.getInputStream();
         return read(in);

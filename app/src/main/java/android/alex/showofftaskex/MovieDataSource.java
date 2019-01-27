@@ -26,9 +26,10 @@ public class MovieDataSource {
             public void run() {
                 try {
                     //Uses-permission INTERNET in manifest
-                    //String json = StreamIO.readWebSite("http://api.androidhive.info/json/movies.json");
-                    InputStream in = context.getAssets().open("movies.txt");
-                    String json = StreamIO.read(in);
+                    String json = StreamIO.readWebSite(
+                            "https://api.androidhive.info/json/movies.json#");
+                    //InputStream in = context.getAssets().open("movies.txt");
+                    //String json = StreamIO.read(in);
                     ArrayList<MovieItem> movies = parse(json);
                     listener.onDataArrived(movies, null);
                 } catch (IOException | JSONException e) {
