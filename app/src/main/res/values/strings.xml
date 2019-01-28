@@ -6,4 +6,6 @@
     <string name="movie_name">Name</string>
     <string name="release_year">2000</string>
     <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_m">MActivity</string>
 </resources>

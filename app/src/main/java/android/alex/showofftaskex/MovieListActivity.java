@@ -1,19 +1,17 @@
 package android.alex.showofftaskex;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieDataSource.OnDataArrivedListener {
+public class MovieListActivity extends AppCompatActivity implements MovieDataSource.OnDataArrivedListener {
 
     // /1) find the  Recycler
     private RecyclerView rvMovies;
@@ -22,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements MovieDataSource.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_movie_list);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //1) find the  Recycler
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
@@ -39,11 +38,11 @@ public class MainActivity extends AppCompatActivity implements MovieDataSource.O
             public void run() {
                 if (e == null) {
                     //3) layout manager:
-                    linearLayoutManager = new LinearLayoutManager(MainActivity.this);
+                    linearLayoutManager = new LinearLayoutManager(MovieListActivity.this);
 
                     //4) init the adapter:
                     MovieAdapter adapter = new MovieAdapter(/*getLayoutInflator(), */
-                            MainActivity.this, movies);
+                            MovieListActivity.this, movies);
 
                     //5) give the layout manager to the recycler.
                     rvMovies.setLayoutManager(linearLayoutManager);
@@ -52,10 +51,33 @@ public class MainActivity extends AppCompatActivity implements MovieDataSource.O
                     rvMovies.setAdapter(adapter);
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MovieListActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.Logout) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
