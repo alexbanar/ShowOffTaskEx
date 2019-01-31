@@ -6,5 +6,5 @@
         android:id="@+id/Logout"
         android:orderInCategory="100"
         android:title="Logout"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>

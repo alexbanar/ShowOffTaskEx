@@ -1,12 +1,11 @@
 package android.alex.showofftaskex;
 
+import android.alex.showofftaskex.item_model.MovieItem;
+import android.alex.showofftaskex.model_sqlite.DAO;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,17 +25,17 @@ public class MovieListActivity extends AppCompatActivity implements MovieDataSou
         //1) find the  Recycler
         rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
 
-        //2) Take data from the file and put it into List of Movie Items
-        MovieDataSource.getMovies(this, this);
+        //2) and put it into List of Movie Item
+        MovieDataSource.getMoviesFromSQLite(this, this);
     }
 
     @Override
-    public void onDataArrived(final ArrayList<MovieItem> movies, final Exception e) {
+    public void onDataArrived(final ArrayList<MovieItem> movies) {
         //this.runOnUiThread(new Runnable()
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (e == null) {
+                if (movies.size() > 0) {
                     //3) layout manager:
                     linearLayoutManager = new LinearLayoutManager(MovieListActivity.this);
 
@@ -51,14 +50,21 @@ public class MovieListActivity extends AppCompatActivity implements MovieDataSou
                     rvMovies.setAdapter(adapter);
                 }
                 else {
-                    Toast.makeText(MovieListActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
+                    Toast.makeText(MovieListActivity.this,
+                                   "The table 'Movies' is empty",
+                                    Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //DAO.getInstance(this).deleteAllMovies();
+    }
+
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -74,10 +80,11 @@ public class MovieListActivity extends AppCompatActivity implements MovieDataSou
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.Logout) {
-            finish();
+            //finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 }
