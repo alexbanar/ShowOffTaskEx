@@ -1,5 +1,6 @@
-package android.alex.showofftaskex;
+package android.alex.showofftaskex.main_screen_activities;
 
+import android.alex.showofftaskex.R;
 import android.alex.showofftaskex.item_model.MovieItem;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +31,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch(NullPointerException e) {
+            Toast.makeText(this,
+                            "There is a problem with the screen arrow back to go to back screen",
+                             Toast.LENGTH_SHORT).show();
+        }
+
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();

@@ -1,8 +1,10 @@
-package android.alex.showofftaskex;
+package android.alex.showofftaskex.manipulation_data;
 
 
+import android.alex.showofftaskex.StreamIO;
 import android.alex.showofftaskex.item_model.MovieItem;
 import android.alex.showofftaskex.model_sqlite.DAO;
+import android.alex.showofftaskex.model_sqlite.DBHelper;
 import android.content.Context;
 
 import org.json.JSONArray;
@@ -23,6 +25,8 @@ public class MovieDataSource {
         void onDataArrived(ArrayList<MovieItem> movies);
     }
 
+    private final static String SITE_DATA_ADDRESS = "https://api.androidhive.info/json/movies.json#" ;
+
     private static DAO dao;
 
     public static void saveMoviesInSQLite(final OnDataSavedListener listener, final Context context){
@@ -31,8 +35,7 @@ public class MovieDataSource {
             public void run() {
                 try {
                     //Uses-permission INTERNET in manifest
-                    String json = StreamIO.readWebSite(
-                            "https://api.androidhive.info/json/movies.json#");
+                    String json = StreamIO.readWebSite(SITE_DATA_ADDRESS);
                     //InputStream in = context.getAssets().open("movies.txt");
                     //String json = StreamIO.read(in);
                     parseAndSave(json, context);
@@ -87,7 +90,8 @@ public class MovieDataSource {
             @Override
             public void run() {
                 dao = DAO.getInstance(context);
-                ArrayList<MovieItem> movies = dao.getMovieItems("releaseYear");
+                ArrayList<MovieItem> movies =
+                        dao.getMovieItems(DBHelper.MoviesContract.TBL_MOVIES_COL_RELEASE_YEAR);
                 listener.onDataArrived(movies);
             }
         });

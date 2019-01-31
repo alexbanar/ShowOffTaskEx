@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="android.alex.showofftaskex.MovieDetailsActivity"
+    tools:context="android.alex.showofftaskex.main_screen_activities.MovieDetailsActivity"
     tools:layout_editor_absoluteY="56dp"
     tools:showIn="@layout/activity_movie_details">
 
@@ -32,7 +32,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Year: "
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.824"
         app:layout_constraintStart_toEndOf="@+id/tvbRating"
@@ -47,7 +47,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text=""
         android:textAppearance="@android:style/TextAppearance.Widget.TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:text="Rating: "
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/tvbReleaseYear"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/tvbGenre2"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -81,7 +81,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/tvbGenre3"
         app:layout_constraintEnd_toStartOf="@+id/tvbGenre3"
         app:layout_constraintHorizontal_bias="0.502"
@@ -94,7 +94,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvbReleaseYear" />
 

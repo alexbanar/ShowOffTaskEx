@@ -1,7 +1,9 @@
-package android.alex.showofftaskex;
+package android.alex.showofftaskex.main_screen_activities;
 
+import android.alex.showofftaskex.manipulation_data.MovieAdapter;
+import android.alex.showofftaskex.manipulation_data.MovieDataSource;
+import android.alex.showofftaskex.R;
 import android.alex.showofftaskex.item_model.MovieItem;
-import android.alex.showofftaskex.model_sqlite.DAO;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;

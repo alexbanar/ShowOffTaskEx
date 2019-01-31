@@ -1,7 +1,9 @@
-package android.alex.showofftaskex;
+package android.alex.showofftaskex.manipulation_data;
 
 
+import android.alex.showofftaskex.R;
 import android.alex.showofftaskex.item_model.MovieItem;
+import android.alex.showofftaskex.main_screen_activities.MovieDetailsActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;

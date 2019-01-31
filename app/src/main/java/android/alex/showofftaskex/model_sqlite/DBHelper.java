@@ -46,26 +46,26 @@ public class DBHelper extends SQLiteOpenHelper {
         /**
          * The Data base Name
          */
-        public static final String DBName = "Movies";
+        public static final String DBName = "MoviesDB";
         /**
          * The Current Data base version
          */
         public static int DBversion = 2;
 
-        public static String TBL_MOVIES = "Movies";
+        public static final String TBL_MOVIES = "Movies";
 
-        public static String TBL_MOVIES_COL_ID = "id";
+        public static final String TBL_MOVIES_COL_ID = "id";
 
-        public static String TBL_MOVIES_COL_TITLE = "title";
+        public static final String TBL_MOVIES_COL_TITLE = "title";
 
-        public static String TBL_MOVIES_COL_RELEASE_YEAR = "releaseYear";
+        public static final String TBL_MOVIES_COL_RELEASE_YEAR = "releaseYear";
 
-        public static String TBL_MOVIES_COL_RATING = "rating";
+        public static final String TBL_MOVIES_COL_RATING = "rating";
 
-        public static String TBL_MOVIES_COL_GENRE1 = "genre1";
-        public static String TBL_MOVIES_COL_GENRE2 = "genre2";
-        public static String TBL_MOVIES_COL_GENRE3 = "genre3";
+        public static final String TBL_MOVIES_COL_GENRE1 = "genre1";
+        public static final String TBL_MOVIES_COL_GENRE2 = "genre2";
+        public static final String TBL_MOVIES_COL_GENRE3 = "genre3";
 
-        public static String TBL_MOVIES_COL_IMAGE = "image";
+        public static final String TBL_MOVIES_COL_IMAGE = "image";
      }
 }

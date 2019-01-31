@@ -71,7 +71,7 @@ public class StreamIO {
         } catch (MalformedURLException e) {
             throw new IOException("failed at parsing the URL.", e);
         }
-        //Log.d("alex", address);
+
         URLConnection con = url.openConnection();
         InputStream in = con.getInputStream();
         return read(in);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,10 @@ import java.util.List;
     private static DAO sharedInstance;
     //properties
     private SQLiteDatabase db;
+    private Context context;
     private DAO(Context context /*No Instances please*/){
         db = new DBHelper(context).getWritableDatabase();
+        this.context = context;
     }
 
     //Factory method
@@ -78,25 +81,35 @@ import java.util.List;
         Cursor cursor = db.query(DBHelper.MoviesContract.TBL_MOVIES,
             /*for order for fields from cursor list*/
             //equivalent to passing 'null' that will return all columns
-            new String[]{"id","title", "releaseYear", "rating", "genre1", "genre2", "genre3", "image"},
+            new String[]{DBHelper.MoviesContract.TBL_MOVIES_COL_ID,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_TITLE,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_RELEASE_YEAR,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_RATING,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE1,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE2,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE3,
+                    DBHelper.MoviesContract.TBL_MOVIES_COL_IMAGE
+                    },
             null,
             null,
             null,
             null,
-             orderBy
+            //String that is passed as a parameter and has to be used as the
+            //field for ordering movies(in extending order for now)
+                orderBy
              );
         //cursor need to go to the last row in data set for reversing
         //the order of release year in rows to be from new to old (descending order)
         if((cursor != null) && (cursor.moveToLast())){
             //another way for order for fields from cursor list
-            int idIDx = cursor.getColumnIndex("id");
-            int titleIDx = cursor.getColumnIndex("title");
-            int releaseYearIDx = cursor.getColumnIndex("releaseYear");
-            int ratingIDx = cursor.getColumnIndex("rating");
-            int genre1IDx = cursor.getColumnIndex("genre1");
-            int genre2IDx = cursor.getColumnIndex("genre2");
-            int genre3Dx = cursor.getColumnIndex("genre3");
-            int imageDx = cursor.getColumnIndex("image");
+            int idIDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_ID);
+            int titleIDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_TITLE);
+            int releaseYearIDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_RELEASE_YEAR);
+            int ratingIDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_RATING);
+            int genre1IDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE1);
+            int genre2IDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE2);
+            int genre3Dx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_GENRE3);
+            int imageDx = cursor.getColumnIndex(DBHelper.MoviesContract.TBL_MOVIES_COL_IMAGE);
 
 
             do {
@@ -123,9 +136,14 @@ import java.util.List;
                 MovieItem movieItem = new MovieItem(id, title, releaseYear, rating, genresArray, image);
                 movieItems.add(movieItem);
 
-            } //have to move to previous for achieving the order
+            } //The cursor has to move to previous member in data set for achieving the order
              //of release year in rows to be from new to old (descending order)
             while(cursor.moveToPrevious());
+        }
+        try {
+            cursor.close();
+        } catch(NullPointerException e) {
+            Toast.makeText(context, "Can not close the cursor", Toast.LENGTH_SHORT).show();
         }
 
         return movieItems;
@@ -156,29 +174,6 @@ import java.util.List;
                 //new String[]{String.valueOf(todoID)
                 null
                 );
-    }
-
-    public long getLastInsertedID(){
-        /**
-         * Runs the provided SQL and returns a {@link Cursor} over the result set.
-         *
-         * @param sql the SQL query. The SQL string must not be ; terminated
-         * @param selectionArgs You may include ?s in where clause in the query,
-         *     which will be replaced by the values from selectionArgs. The
-         *     values will be bound as Strings.
-         * @return A {@link Cursor} object, which is positioned before the first entry. Note that
-         * {@link Cursor}s are not synchronized, see the documentation for more details.
-         */
-        Cursor cursor = db.rawQuery("SELECT MAX(ID) as lastInsertedID FROM Movies", null);
-        if(!cursor.moveToFirst()){
-            throw new RuntimeException("The table is empty");
-        }
-
-        int lastInsertedID = cursor.getInt(cursor.getColumnIndex("lastInsertedID"));
-        //"SELECT * FROM sqlite_sequence" - table that manages ID key field
-        cursor.close();
-        System.out.println(lastInsertedID);
-        return lastInsertedID;
     }
 
     public void deleteMovies(int id) {

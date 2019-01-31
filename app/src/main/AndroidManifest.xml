@@ -12,21 +12,23 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MovieDetailsActivity"
-            android:parentActivityName=".MovieListActivity"
+            android:name=".main_screen_activities.MovieDetailsActivity"
+            android:parentActivityName=".main_screen_activities.MovieListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MovieListActivity" />
+                android:value=".main_screen_activities.MovieListActivity" />
         </activity>
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".main_screen_activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieListActivity" />
+        <activity
+            android:name=".main_screen_activities.MovieListActivity"
+            android:launchMode="singleTop">
+        </activity>
     </application>
-
 </manifest>
